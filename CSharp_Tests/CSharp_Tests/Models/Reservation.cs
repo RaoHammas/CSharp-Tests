@@ -6,7 +6,7 @@
 
         public bool CanBeCancelledBy(User user)
         {
-            if (user.IsAdmin || user == ReservationMadeBy)
+            if (user.IsAdmin || user.Name == ReservationMadeBy.Name)
             {
                 return true;
             }
