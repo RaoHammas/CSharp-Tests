@@ -16,7 +16,55 @@ namespace CSharp_Test.MSUnitTests
             {
                 ReservationMadeBy = new User
                 {
-                    IsAdmin = false, 
+                    Name = "John Doe"
+                }
+            };
+
+            //Act
+            var results = reservation.CanBeCancelledBy(new User
+            {
+                IsAdmin = true,
+            });
+
+            //Assert
+
+            Assert.IsTrue(results);
+        }
+
+        [TestMethod]
+        public void CanBeCancelledBy_UserIsNotAdmin_ReturnsFalse()
+        {
+            //Arrange
+
+            var reservation = new Reservation
+            {
+                ReservationMadeBy = new User
+                {
+                    IsAdmin = false,
+                }
+            };
+
+            //Act
+            var results = reservation.CanBeCancelledBy(new User
+            {
+                IsAdmin = false,
+            });
+
+            //Assert
+
+            Assert.IsTrue(results);
+        }
+
+        [TestMethod]
+        public void CanBeCancelledBy_UserIsNotAdminButSameUser_ReturnsFalse()
+        {
+            //Arrange
+
+            var reservation = new Reservation
+            {
+                ReservationMadeBy = new User
+                {
+                    IsAdmin = false,
                     Name = "Admin"
                 }
             };
@@ -31,8 +79,6 @@ namespace CSharp_Test.MSUnitTests
             //Assert
 
             Assert.IsTrue(results);
-
-
         }
-    }
+    } //end of class
 }
