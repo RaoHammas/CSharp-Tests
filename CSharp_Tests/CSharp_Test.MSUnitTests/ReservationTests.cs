@@ -8,7 +8,7 @@ namespace CSharp_Test.MSUnitTests
     {
         [TestMethod]
         //public void Method_Scenario_ExpectedBehavior()
-        public void CanBeCancelledBy_UserIsAdmin_ReturnsTrue()
+        public void CanBeCancelledBy_CanAdminCancel_ReturnsTrue()
         {
             //Arrange
 
@@ -32,7 +32,7 @@ namespace CSharp_Test.MSUnitTests
         }
 
         [TestMethod]
-        public void CanBeCancelledBy_UserIsNotAdmin_ReturnsFalse()
+        public void CanBeCancelledBy_CanOtherUserCancel_ReturnsFalse()
         {
             //Arrange
 
@@ -41,6 +41,7 @@ namespace CSharp_Test.MSUnitTests
                 ReservationMadeBy = new User
                 {
                     IsAdmin = false,
+                    Name = "Admin"
                 }
             };
 
@@ -48,15 +49,16 @@ namespace CSharp_Test.MSUnitTests
             var results = reservation.CanBeCancelledBy(new User
             {
                 IsAdmin = false,
+                Name = "Other User"
             });
 
             //Assert
 
-            Assert.IsTrue(results);
+            Assert.IsFalse(results);
         }
 
         [TestMethod]
-        public void CanBeCancelledBy_UserIsNotAdminButSameUser_ReturnsFalse()
+        public void CanBeCancelledBy_CanSameUserCancel_ReturnsFalse()
         {
             //Arrange
 
