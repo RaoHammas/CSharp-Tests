@@ -5,6 +5,7 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+
 jobs:
   build:
 
@@ -18,7 +19,7 @@ jobs:
         dotnet-version: 5.0.x
     - name: Restore dependencies
       run: dotnet restore
-      working-directory: CSharp-Tests/CSharp_Tests
+      working-directory: CSharp-Tests/CSharp_Tests/CSharp_Tests
     - name: Build
       run: dotnet build --no-restore
     - name: Test
